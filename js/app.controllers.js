@@ -21,7 +21,7 @@
           $scope.total_retention_year   = 0;
           $scope.avg_retention_month    = 0;
           $scope.avg_retention_year     = 0;
-          $scope.attritionType          = 'client';
+          $scope.attritionType          = 'revenue';
           $scope.recentlyEdited         = [];
           $scope.calculated             = false;
           $scope.percent                = 0;
@@ -30,6 +30,10 @@
           $scope.data = { // This is necessary due to child scope of ion-content
             principal:  null,
             loss:       null
+          };
+
+          $scope.form = {
+            attrition: null
           };
 
           $scope.selectType = function(type) {
@@ -77,6 +81,16 @@
           }
 
           $scope.calculate = function() {
+            if ( !$scope.form.AttritionForm.$valid ) {
+              $scope.total_retention_month  = 0;
+              $scope.total_retention_year   = 0;
+              $scope.avg_retention_month    = 0;
+              $scope.avg_retention_year     = 0;
+              $scope.calculated             = false;
+              $scope.percent                = 0;
+              return false; // If fields are not filled then do nothing
+            }
+
             $scope.calcRate();
             $scope.calcLoss();
             $scope.calcPrincipal();

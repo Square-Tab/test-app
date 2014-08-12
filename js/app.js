@@ -29,4 +29,9 @@
 
   ;
 
+  // Initialization
+  angular.element(document).ready(function() {
+    angular.bootstrap ( document, ['SmartCalculatorApp'] );
+  });
+
 })(window, angular);

@@ -66,7 +66,6 @@
 								//SVG canvas - default is half the size of parent's width
 								width = angular.element ( element[0] ).parent()[0].offsetWidth,
 								height = angular.element ( element[0] ).parent()[0].offsetWidth,
-								radius = Math.min(width, height) / 2,
 								min = opts.min,
 								max = opts.max,
 								//data normalizer - Tau: http://tauday.com/tau-manifesto
@@ -76,10 +75,15 @@
 									r = percent < 50 ? 255 : Math.floor(255 - (percent * 2 - 100) * 255 / 100);
 									g = percent > 50 ? 255 : Math.floor((percent * 2) * 255 / 100);
 									return 'rgb(' + r + ',' + g + ',0)';
-								},
+								};
+
+							width 	= width > 0 ? width : $('#' + attrs.id).width();
+							height 	= height > 0 ? height : $('#' + attrs.id).height();
+
+							var radius = Math.min(width, height) / 2;
 
 								//draw circle
-								arc = d3.svg.arc()
+							var	arc = d3.svg.arc()
 									// .innerRadius((height + width) / 7 + 10)//50
 									// .outerRadius((height + width) / 5 + 10)//65
 									.innerRadius ( radius / 1.5 )
