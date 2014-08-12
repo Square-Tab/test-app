@@ -79,6 +79,7 @@
 
 							width 	= width > 0 ? width : $('#' + attrs.id).parent().parent().width();
 							height 	= height > 0 ? height : $('#' + attrs.id).parent().parent().height();
+							height 	= height > 0 ? height : width;
 
 							console.log(width, height, id, $('#' + attrs.id))
 
