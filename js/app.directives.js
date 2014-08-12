@@ -77,8 +77,8 @@
 									return 'rgb(' + r + ',' + g + ',0)';
 								};
 
-							width 	= width > 0 ? width : $('#' + attrs.id).width();
-							height 	= height > 0 ? height : $('#' + attrs.id).height();
+							width 	= width > 0 ? width : $('#' + attrs.id).parent().parent().width();
+							height 	= height > 0 ? height : $('#' + attrs.id).parent().parent().height();
 
 							console.log(width, height, id, $('#' + attrs.id))
 
