@@ -80,6 +80,8 @@
 							width 	= width > 0 ? width : $('#' + attrs.id).width();
 							height 	= height > 0 ? height : $('#' + attrs.id).height();
 
+							console.log(width, height, id, $('#' + attrs.id))
+
 							var radius = Math.min(width, height) / 2;
 
 								//draw circle
