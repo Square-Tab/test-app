@@ -64,8 +64,8 @@
 							var id = attrs.id,
 								data = ( (value < opts.min) ? 0 : value) / 100,
 								//SVG canvas - default is half the size of parent's width
-								width = angular.element ( element[0] ).parent()[0].offsetWidth,
-								height = angular.element ( element[0] ).parent()[0].offsetWidth,
+								// width = angular.element ( element[0] ).parent()[0].offsetWidth,
+								// height = angular.element ( element[0] ).parent()[0].offsetWidth,
 								min = opts.min,
 								max = opts.max,
 								//data normalizer - Tau: http://tauday.com/tau-manifesto
@@ -77,8 +77,8 @@
 									return 'rgb(' + r + ',' + g + ',0)';
 								};
 
-							width 	= width > 0 ? width : $('#' + attrs.id).parent().parent().width();
-							height 	= height > 0 ? height : $('#' + attrs.id).parent().parent().height();
+							var width 	= width > 0 ? width : $('#' + attrs.id).parent().parent().width() / 2;
+							var height 	= height > 0 ? height : $('#' + attrs.id).parent().parent().height() / 2;
 							height 	= height > 0 ? height : width;
 
 							console.log(width, height, id, $('#' + attrs.id))
