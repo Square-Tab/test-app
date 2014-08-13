@@ -81,23 +81,31 @@
           }
 
           $scope.smartform = function(ev) {
+            console.log(ev.target.id, angular.isNumber ( $scope.data.loss ), angular.isNumber ( $scope.data.principal ));
+
             if ( ev.keyCode == 13 )
               switch ( ev.target.id ) {
                 case 'principal':
                   
-                  if ( angular.isNumber ( $scope.data.loss ) )
+                  if ( angular.isNumber ( $scope.data.loss ) ) {
                     document.querySelector ( '#calculate' ).focus();
-                  else
+                    console.log('focus calculate button');
+                  }
+                  else {
                     document.querySelector ( '#loss' ).select();
-
+                    console.log('focus loss input');
+                  }
                   break;
                 case 'loss':
 
-                  if ( angular.isNumber ( $scope.data.principal ) )
+                  if ( angular.isNumber ( $scope.data.principal ) ) {
                     document.querySelector ( '#calculate' ).focus();
-                  else
+                    console.log('focus calculate button');
+                  }
+                  else {
                     document.querySelector ( '#princpal' ).select();
-
+                    console.log('focus principal input');
+                  }
                   break;
               }
           };

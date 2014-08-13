@@ -81,16 +81,14 @@
 							var height 	= height > 0 ? height : $('#' + attrs.id).parent().parent().height() / 2;
 							height 	= height > 0 ? height : width;
 
-							console.log(width, height, id, $('#' + attrs.id))
-
 							var radius = Math.min(width, height) / 2;
 
 								//draw circle
 							var	arc = d3.svg.arc()
 									// .innerRadius((height + width) / 7 + 10)//50
 									// .outerRadius((height + width) / 5 + 10)//65
-									.innerRadius ( radius / 1.5 )
-									.outerRadius ( radius )
+									.innerRadius ( radius  * 0.7 )
+									.outerRadius ( radius * 0.9 )
 									.startAngle(0),
 
 								//create svg
