@@ -36,7 +36,8 @@
 	background-color: #fafafa;
 	border-bottom: 1px solid #c6c6c6;
 	padding-top: 0px;
-	top: 46px;
+	top: 48px;
+	height: 48px;
 }
 
 .calc_subheader .row {
@@ -50,6 +51,7 @@
 	-moz-border-radius-bottomleft: 8px !important;
 	border-top-left-radius: 8px !important;
 	border-bottom-left-radius: 8px !important;
+	border-right: none !important;
 }
 
 .calc_subheader_btn.right {
@@ -59,12 +61,13 @@
 	-moz-border-radius-bottomright: 8px !important;
 	border-top-right-radius: 8px !important;
 	border-bottom-right-radius: 8px !important;
+	border-left: none !important;
 }
 
 .calc_subheader_btn {
 	background-color: #f5f6f7 !important;
 	color: #1992d1 !important;
-	border-color: #1992d1 !important;
+	border: 2px solid #1992d1 !important;
 	font-size: 16px !important;
 }
 
@@ -108,7 +111,7 @@
 }
 
 .calc_label {
-	font-size: 16px;
+	font-size: 14px;
 	color: #1992d1;
 }
 
@@ -161,6 +164,7 @@
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+	font-size: 14px;
 }
 
 .calc_calculate_btn {
@@ -172,6 +176,7 @@
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+	font-size: 14px;
 }
 
 .remaining-text {
@@ -212,6 +217,12 @@
 	top: 12px
 	right: 8px;
 	z-index: 2;
+}
+
+/** Ionic Customizations **/
+
+.col.col-offset-5 {
+	margin-left: 5%;
 }
 
 .col.col-offset-15 {

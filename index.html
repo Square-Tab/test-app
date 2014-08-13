@@ -64,103 +64,107 @@
 
         <!-- Clients Content -->
         <ion-content class="calc_content">
-          <form name="form.AttritionForm">
+          
+          <div class="row">
+            <div class="col col-90 col-offset-5">
 
-            <div class="row">
-              <div class="col text-center">
-                <h2 class="calc_brown_title_text calc_title_1 font_montserrat">MONTHLY ATTRITION RATE</h2>
-              </div>
-            </div>
+              <form name="form.AttritionForm">
 
-            <!-- Graphic -->
-            <div class="row calc_graphic">
-              <div class="col-50 col-offset-25 font_opensans">
-                <div id="donutchart" data-donutchart data-value="{{percent}}" data-options="{color: '#f68c20', min: 0}" ng-class="{active: calculated}"></div>
-              </div>
-            </div>
-            <!--/ Graphic -->
+                <div class="row">
+                  <div class="col text-center">
+                    <h2 class="calc_brown_title_text calc_title_1 font_montserrat">MONTHLY ATTRITION RATE</h2>
+                  </div>
+                </div>
 
-            <div class="row">
-              <div class="col">
-                <table class="calc_table">
+                <!-- Graphic -->
+                <div class="row calc_graphic">
+                  <div class="col-50 col-offset-25 font_opensans">
+                    <div id="donutchart" data-donutchart data-value="{{percent}}" data-options="{color: '#f68c20', min: 0}" ng-class="{active: calculated}"></div>
+                  </div>
+                </div>
+                <!--/ Graphic -->
 
-                  <thead>
-                    <tr>
-                      <th colspan="4" class="calc_table_title calc_brown_title_text text-center font_montserrat" data-ng-if="attritionType == 'client' ">CLIENT RETENTION</th>
-                      <th colspan="4" class="calc_table_title calc_brown_title_text text-center font_montserrat" data-ng-if="attritionType == 'revenue'">REVENUE RETENTION</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <tr>
-                      <th></th>
-                      <th class="calc_table_label font_montserrat">MONTHS</th>
-                      <th class="calc_table_label font_montserrat">YEARS</th>
-                    </tr>
-
-                    <tr>
-                      <td class="calc_table_label text-right font_montserrat">TOTAL</td>
-                      <td class="text-center calc_value cleared font_opensans" ng-class="{active: calculated}">
-                        <span>{{total_retention_month | numCheck:2}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                      </td>
-
-                      <td class="text-center calc_value cleared font_opensans" ng-class="{active: calculated}">
-                        <span>{{total_retention_year | numCheck:2}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                      <td class="calc_table_label text-right font_montserrat">AVERAGE</td>
-                      <td class="text-center calc_value cleared font_opensans" ng-class="{active: calculated}">
-                        <span>{{avg_retention_month | numCheck:2}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                      </td>
-                      <td class="text-center calc_value cleared font_opensans" ng-class="{active: calculated}">
-                        <span>{{avg_retention_year | numCheck:2}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="row calc_label_row font_opensans">
-              <div class="col calc_label_col ">
-                <label for="principal" class="calc_label" data-ng-if="attritionType == 'revenue'">Last month&#39;s revenue</label>
-                <label for="principal" class='calc_label' data-ng-if="attritionType == 'client'"># of clients last month</label>
-              </div>
-
-              <div class="col col-33 input_container" data-ng-class="{active: data.principal != null}">
-                <input id='principal' class="calc_input" name='principal' type="number" min="0" data-ng-model="data.principal" data-ng-required="true" data-allowed-characters="[\d\.,\b\t]" />
-                <span class="prepend" data-ng-if="attritionType == 'revenue'">$</span>
-              </div>
-            </div>
-
-            <div class="row calc_label_row">
-              <div class="col calc_label_col">
-                <label for="loss" class='calc_label' data-ng-if="attritionType == 'revenue'">Revenue lost this month</label>
-                <label for="loss" class='calc_label' data-ng-if="attritionType == 'client'"># of clients lost this month</label>
-              </div>
-
-              <div class="col col-33 input_container" data-ng-class="{active: data.loss != null}">
-                <input id='loss' class="calc_input" name='loss' type="number" min="0" data-ng-model="data.loss" data-ng-required="true" data-allowed-characters="[\d\.,\b\t]" />
-                <span class="prepend" data-ng-if="attritionType == 'revenue'">$</span>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col col-offset-15">
                 <div class="row">
                   <div class="col">
+                    <table class="calc_table">
+
+                      <thead>
+                        <tr>
+                          <th colspan="4" class="calc_table_title calc_brown_title_text text-center font_montserrat" data-ng-if="attritionType == 'client' ">CLIENT RETENTION</th>
+                          <th colspan="4" class="calc_table_title calc_brown_title_text text-center font_montserrat" data-ng-if="attritionType == 'revenue'">REVENUE RETENTION</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr>
+                          <th></th>
+                          <th class="calc_table_label font_montserrat">MONTHS</th>
+                          <th class="calc_table_label font_montserrat">YEARS</th>
+                        </tr>
+
+                        <tr>
+                          <td class="calc_table_label text-right font_montserrat">TOTAL</td>
+                          <td class="text-center calc_value cleared font_opensans" ng-class="{active: calculated}">
+                            <span>{{total_retention_month | numCheck:2}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                          </td>
+
+                          <td class="text-center calc_value cleared font_opensans" ng-class="{active: calculated}">
+                            <span>{{total_retention_year | numCheck:2}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                          <td class="calc_table_label text-right font_montserrat">AVERAGE</td>
+                          <td class="text-center calc_value cleared font_opensans" ng-class="{active: calculated}">
+                            <span>{{avg_retention_month | numCheck:2}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                          </td>
+                          <td class="text-center calc_value cleared font_opensans" ng-class="{active: calculated}">
+                            <span>{{avg_retention_year | numCheck:2}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="row calc_label_row font_opensans">
+                  <div class="col calc_label_col ">
+                    <label for="principal" class="calc_label" data-ng-if="attritionType == 'revenue'">Last month&#39;s revenue</label>
+                    <label for="principal" class='calc_label' data-ng-if="attritionType == 'client'"># of clients last month</label>
+                  </div>
+
+                  <div class="col col-33 input_container" data-ng-class="{active: data.principal != null}">
+                    <input id='principal' class="calc_input" name='principal' type="number" min="0" data-ng-model="data.principal" data-ng-required="true" data-allowed-characters="[\d\.,\b\t]" tabindex="1" />
+                    <span class="prepend" data-ng-if="attritionType == 'revenue'">$</span>
+                  </div>
+                </div>
+
+                <div class="row calc_label_row">
+                  <div class="col calc_label_col">
+                    <label for="loss" class='calc_label' data-ng-if="attritionType == 'revenue'">Revenue lost this month</label>
+                    <label for="loss" class='calc_label' data-ng-if="attritionType == 'client'"># of clients lost this month</label>
+                  </div>
+
+                  <div class="col col-33 input_container" data-ng-class="{active: data.loss != null}">
+                    <input id='loss' class="calc_input" name='loss' type="number" min="0" data-ng-model="data.loss" data-ng-required="true" data-allowed-characters="[\d\.,\b\t]" tabindex="2" />
+                    <span class="prepend" data-ng-if="attritionType == 'revenue'">$</span>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col col-offset-15">
                     <button type="button" class="button button-block calc_clear_btn font_opensans" data-ng-click="clear()">Clear</button>
                   </div>
                   <div class="col">
-                    <button type="button" class="button button-block calc_calculate_btn font_opensans" data-ng-click="calculate()">Calculate</button>
+                    <button type="button" class="button button-block calc_calculate_btn font_opensans" data-ng-click="calculate()" tabindex="3">Calculate</button>
                   </div>
                 </div>
-              </div>
-            </div>
 
-        </form>
+            </form>
+
+            </div>
+          </div>
+
         </ion-content>
         <!--/ SmartCalculator Content -->
 
