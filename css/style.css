@@ -23,17 +23,20 @@
 /* ------------------------------- END OF FONTS ----------------------------- */
 .calc_header {
 	background-color: #484848;
+	height: 46px
 }
 
 .calc_header h1 {
 	color: #fff;
 	font-weight: bold;
+	height: 46px
 }
 
 .calc_subheader {
 	background-color: #fafafa;
 	border-bottom: 1px solid #c6c6c6;
 	padding-top: 0px;
+	top: 46px;
 }
 
 .calc_subheader .row {
@@ -62,11 +65,16 @@
 	background-color: #f5f6f7 !important;
 	color: #1992d1 !important;
 	border-color: #1992d1 !important;
+	font-size: 16px !important;
 }
 
 .calc_subheader_btn.active {
 	background-color: #1992d1 !important;
 	color: #fff !important;
+}
+
+.calc_content {
+	top: 100px !important;
 }
 
 .calc_brown_title_text {
@@ -79,16 +87,24 @@
 	font-weight: bold;
 }
 
+.calc_graphic {
+	margin-bottom: 20px;
+}
+
 .calc_table {
 	width: 100%;
 }
 
-.calc_value_cleared {
+.calc_value {
+	font-weight: bold;
+}
+
+.calc_value.cleared {
 	color: #dfdfdf;
 }
 
-.calc_value_active {
-	color: #ff8c00;
+.calc_value.active {
+	color: #ff8c00 !important;
 }
 
 .calc_label {
@@ -98,7 +114,11 @@
 
 .calc_table {
 	width: 100%;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
+}
+
+.calc_table_title {
+	padding-bottom: 10px;
 }
 
 .calc_table_label {
@@ -182,14 +202,18 @@
 
 .prepend {
 	position: absolute;
-	top: 8px;
-	left: 5px;
+	top: 12px;
+	left: 8px;
 	z-index: 2;
 }
 
 .append {
 	position: absolute;
-	top: 8px
-	right: 5px;
+	top: 12px
+	right: 8px;
 	z-index: 2;
+}
+
+.col.col-offset-15 {
+	margin-left: 15%;
 }
