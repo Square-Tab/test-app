@@ -89,7 +89,8 @@
                   
                   if ( angular.isNumber ( $scope.data.loss ) ) {
                     document.querySelector ( '#calculate' ).focus();
-                    console.log('focus calculate button');
+                    console.log('try to calculate');
+                    $scope.calculate();
                   }
                   else {
                     document.querySelector ( '#loss' ).select();
@@ -99,8 +100,9 @@
                 case 'loss':
 
                   if ( angular.isNumber ( $scope.data.principal ) ) {
-                    document.querySelector ( '#calculate' ).focus();
-                    console.log('focus calculate button');
+                    // document.querySelector ( '#calculate' ).focus();
+                    $scope.calculate();
+                    console.log('try to calculate');
                   }
                   else {
                     document.querySelector ( '#principal' ).select();
