@@ -134,7 +134,7 @@
                   </div>
 
                   <div class="col col-33 input_container" data-ng-class="{active: data.principal != null}">
-                    <input id='principal' class="calc_input" name='principal' type="number" min="0" data-ng-model="data.principal" data-ng-required="true" data-allowed-characters="[\d\.,\b\t]" tabindex="1" />
+                    <input id='principal' class="calc_input" name='principal' type="number" min="0" data-ng-model="data.principal" data-ng-required="true" data-allowed-characters="[\d\.,\b\t]" tabindex="1" data-ng-keypress="test($event)" />
                     <span class="prepend" data-ng-if="attritionType == 'revenue'">$</span>
                   </div>
                 </div>
@@ -146,7 +146,7 @@
                   </div>
 
                   <div class="col col-33 input_container" data-ng-class="{active: data.loss != null}">
-                    <input id='loss' class="calc_input" name='loss' type="number" min="0" data-ng-model="data.loss" data-ng-required="true" data-allowed-characters="[\d\.,\b\t]" tabindex="2" />
+                    <input id='loss' class="calc_input" name='loss' type="number" min="0" data-ng-model="data.loss" data-ng-required="true" data-allowed-characters="[\d\.,\b\t]" tabindex="2" data-ng-keypress="test($event)" />
                     <span class="prepend" data-ng-if="attritionType == 'revenue'">$</span>
                   </div>
                 </div>
