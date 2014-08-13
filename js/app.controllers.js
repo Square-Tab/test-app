@@ -92,8 +92,8 @@
             }
 
             $scope.calcRate();
-            $scope.calcLoss();
-            $scope.calcPrincipal();
+            // $scope.calcLoss();
+            // $scope.calcPrincipal();
 
             // Computations common to all
             $scope.total_retention_month  = (1 / $scope.rate) * 100;
