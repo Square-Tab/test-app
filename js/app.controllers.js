@@ -80,6 +80,10 @@
             return hasBeenEdited;
           }
 
+          $scope.test = function(ev) {
+            console.log(ev);
+          };
+
           $scope.calculate = function() {
             if ( !$scope.form.AttritionForm.$valid ) {
               $scope.total_retention_month  = 0;
