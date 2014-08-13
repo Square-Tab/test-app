@@ -33,6 +33,7 @@
 .calc_subheader {
 	background-color: #fafafa;
 	border-bottom: 1px solid #c6c6c6;
+	padding-top: 0px;
 }
 
 .calc_subheader .row {
