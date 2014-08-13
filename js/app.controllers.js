@@ -80,8 +80,26 @@
             return hasBeenEdited;
           }
 
-          $scope.test = function(ev) {
-            console.log(ev);
+          $scope.smartform = function(ev) {
+            if ( ev.keyCode == 13 )
+              switch ( ev.target.id ) {
+                case 'principal':
+                  
+                  if ( angular.isNumber ( $scope.data.loss ) )
+                    document.querySelector ( '#calculate' ).focus();
+                  else
+                    document.querySelector ( '#loss' ).select();
+
+                  break;
+                case 'loss':
+
+                  if ( angular.isNumber ( $scope.data.principal ) )
+                    document.querySelector ( '#calculate' ).focus();
+                  else
+                    document.querySelector ( '#princpal' ).select();
+
+                  break;
+              }
           };
 
           $scope.calculate = function() {
