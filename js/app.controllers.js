@@ -103,7 +103,7 @@
                     console.log('focus calculate button');
                   }
                   else {
-                    document.querySelector ( '#princpal' ).select();
+                    document.querySelector ( '#principal' ).select();
                     console.log('focus principal input');
                   }
                   break;
