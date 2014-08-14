@@ -88,24 +88,26 @@
                 case 'principal':
                   
                   if ( angular.isNumber ( $scope.data.loss ) ) {
-                    document.querySelector ( '#calculate' ).focus();
                     console.log('try to calculate');
                     $scope.calculate();
                   }
                   else {
-                    document.querySelector ( '#loss' ).select();
+                    var lossEl = document.querySelector ( '#loss' );
+                    lossEl.select();
+                    lossEl.setSelectionRange && lossEl.setSelectionRange(0, 0);
                     console.log('focus loss input');
                   }
                   break;
                 case 'loss':
 
                   if ( angular.isNumber ( $scope.data.principal ) ) {
-                    // document.querySelector ( '#calculate' ).focus();
                     $scope.calculate();
                     console.log('try to calculate');
                   }
                   else {
-                    document.querySelector ( '#principal' ).select();
+                    var principalEl = document.querySelector ( '#principal' );
+                    principalEl.select();
+                    principalEl.setSelectionRange && principalEl.setSelectionRange(0, 0);
                     console.log('focus principal input');
                   }
                   break;
