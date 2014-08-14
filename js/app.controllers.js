@@ -94,6 +94,7 @@
                   else {
                     var lossEl = document.querySelector ( '#loss' );
                     lossEl.select();
+                    lossEl.focus();
                     lossEl.setSelectionRange && lossEl.setSelectionRange(0, 0);
                     console.log('focus loss input');
                   }
@@ -107,6 +108,7 @@
                   else {
                     var principalEl = document.querySelector ( '#principal' );
                     principalEl.select();
+                    principalEl.focus();
                     principalEl.setSelectionRange && principalEl.setSelectionRange(0, 0);
                     console.log('focus principal input');
                   }
