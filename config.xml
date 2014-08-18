@@ -33,6 +33,9 @@
     <!-- Deny access to external resources -->
     <access />
 
+    <!-- None permissions required -->
+    <preference name="permissions" value="none" />
+    
     <!-- Features -->
     <preference name="phonegap-version" value="3.5.0" />
     <preference name="orientation" value="portrait" /> <!-- all: default means both landscape and portrait are enabled -->
