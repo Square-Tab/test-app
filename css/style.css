@@ -1,3 +1,6 @@
+/**
+ * Fonts
+ */
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
@@ -21,6 +24,7 @@
 }
 
 /* ------------------------------- END OF FONTS ----------------------------- */
+
 .calc_header {
 	background-color: #484848;
 	height: 46px
@@ -72,7 +76,7 @@
 }
 
 .calc_subheader_btn.active {
-	background-color: #1992d1 !important;
+	background-color: #0f92d1 !important;
 	color: #fff !important;
 }
 
@@ -80,60 +84,30 @@
 	top: 100px !important;
 }
 
-.calc_brown_title_text {
+.calc_val_currency {
+	font-size: 14px;
+	vertical-align: text-top;
+}
+
+.calc_val {
+	display: block;
+	font-size: 24px;
+	color: #e1e1e1;
+}
+
+.calc_val.active {
+	color: #f68c20;
+}
+
+.calc_val_label {
 	color: #7e7e7e;
-}
-
-.calc_title_1 {
-	font-size: 16px !important;
-	margin-top: 20px !important;
+	font-size: 12px;
 	font-weight: bold;
-}
-
-.calc_graphic {
-	margin-bottom: 20px;
-}
-
-.calc_table {
-	width: 100%;
-}
-
-.calc_value {
-	font-weight: bold;
-}
-
-.calc_value.cleared {
-	color: #dfdfdf;
-}
-
-.calc_value.active {
-	color: #ff8c00 !important;
 }
 
 .calc_label {
-	font-size: 14px;
-	color: #1992d1;
-}
-
-.calc_table {
-	width: 100%;
-	margin-bottom: 10px;
-}
-
-.calc_table_title {
-	padding-bottom: 10px;
-}
-
-.calc_table_label {
-	text-align: center;
-	color: #7e7e7e;
-	font-family: 'Montserrat', sans-serif;
-	font-size: 10px;
-	padding-right: 10px;
-}
-
-.calc_table_label.text-right {
-	text-align: right;
+	font-size: 12px;
+	color: #0f92d1;
 }
 
 .calc_label_row {
@@ -179,21 +153,21 @@
 	font-size: 14px;
 }
 
-.remaining-text {
-	display: none;
-}
-
-.percent {
-	font-size: 30px;
-	fill: rgb(232, 232, 232);
-}
-
-#donutchart.active .percent {
-	fill: #ff8c00;
+.slice-text {
+	font-size: 11px;
+	font-weight: bold;
 }
 
 .col-offset-17 {
 	margin-left: 17%;
+}
+
+.calc_brown_title_text {
+	color: #7e7e7e;
+}
+
+.graph_title {
+	font-size: 16px;
 }
 
 .input_container {
@@ -207,15 +181,15 @@
 
 .prepend {
 	position: absolute;
-	top: 12px;
-	left: 8px;
+	top: 13px;
+	left: 6px;
 	z-index: 2;
 }
 
 .append {
 	position: absolute;
-	top: 12px
-	right: 8px;
+	top: 13px;
+	right: 6px;
 	z-index: 2;
 }
 

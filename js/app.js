@@ -6,7 +6,7 @@
 (function(window, angular, undefined) {
 
 
-  angular.module('SmartCalculatorApp', ['ionic'])
+  angular.module('LTVCalculatorApp', ['ionic'])
 
     .run([
       '$ionicPlatform',
@@ -28,10 +28,5 @@
     ])
 
   ;
-
-  // Initialization
-  angular.element(document).ready(function() {
-    angular.bootstrap ( document, ['SmartCalculatorApp'] );
-  });
 
 })(window, angular);

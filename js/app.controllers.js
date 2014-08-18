@@ -6,160 +6,212 @@
 (function(window, angular, $) {
 
 
-  angular.module('SmartCalculatorApp')
+  angular.module('LTVCalculatorApp')
 
     /**
      * Attrition calculator
      *
      * @param Object $scope
      */
-    .controller('AttritionCalculatorCtrl', [
+    .controller('LTVCalculatorCtrl', [
         '$scope',
         function ($scope) {
-          $scope.rate                   = null;
-          $scope.total_retention_month  = 0;
-          $scope.total_retention_year   = 0;
-          $scope.avg_retention_month    = 0;
-          $scope.avg_retention_year     = 0;
-          $scope.attritionType          = 'revenue';
-          $scope.recentlyEdited         = [];
-          $scope.calculated             = false;
-          $scope.percent                = 0;
-          var tempPercent               = 0;
+          $scope.precisionType = 'quick';
 
-          $scope.data = { // This is necessary due to child scope of ion-content
-            principal:  null,
-            loss:       null
+          $scope.ltv = {
+            // Inputs
+            rpc:    null,   // Revenue per Conversion
+            cpc:    null,   // COGS per Conversion
+            vcpc:   null,   // Variable Cost per Conversion
+            crpr:   null,   // Customer Repurchase Rate
+            crfr:   null,   // Customer Referral Rate
+            cr:     null,   // Conversion Rate
+
+            // Precision-only inputs
+            acp:    null,   // Annual Customer Purchases
+            lcr:    null,   // Lifetime Customer Referrals
+            clt:    null,   // Customer Lifetime
+            rrr:    null,   // Required Rate of Return
+
+            // Outputs
+            cltv:   0,      // Customer Life Time Value
+            vltv:   0,      // Visitor Life Time Value
+            tor:    0,      // Life Time Value to Revenue
+            currv:  0,      // Current Value
+            futv:   0,      // Future Value
+            series: [
+              {
+                  name:   'Current Value',
+                  value:  this.currv
+                },
+                {
+                  name:   'Future Value',
+                  value:  this.futv
+                }
+            ],
+
+            getCltv: function() {
+              var that = this.calcPrepClone(),
+                cltv = that.rpc - that.cpc - that.vcpc; // CLTV always starts with gross income
+
+              if($scope.precisionType === 'quick') {
+                cltv = cltv / ( 1 - that.crpr );  // Factor in the repurchase
+                cltv = cltv / ( 1 - that.crfr );  // and referral rates
+              } else {
+                // Required Rate of Return can't be exactly 0
+                var rrr = that.rrr === 0 ? 0.0000000001 : parseFloat(that.rrr);
+
+                cltv = (
+                  cltv*
+                  (that.acp+rrr)*
+                  (
+                    (that.acp*that.crpr)*
+                    (Math.pow((rrr/that.acp+1),(that.acp*that.clt/12))-1)+
+                    rrr*
+                    Math.pow((rrr/that.acp+1),(that.acp*that.clt/12))
+                  )
+                )/(
+                  rrr*
+                  (-that.acp*that.crfr*that.lcr+that.acp+rrr)*
+                  Math.pow((rrr/that.acp+1),(that.acp*that.clt/12))
+                );
+              }
+              this.cltv = cltv;
+              return this.cltv;
+            },
+
+            getVltv: function() {
+              var that = this.calcPrepClone();
+              this.vltv = (that.cltv * parseFloat(that.cr));
+              return this.vltv;
+            },
+
+            getTor: function() {
+              var that = this.calcPrepClone();
+              this.tor = (that.cltv / that.rpc) || 0;
+              return this.tor;
+            },
+
+            check: function() {
+              if($scope.precisionType === 'precision'){
+                //check if 4 inputs for Absolute Rule have been met.
+                if ($scope.lifetimeValue.acp.$dirty
+                    && $scope.lifetimeValue.crfr.$dirty
+                    && $scope.lifetimeValue.lcr.$dirty
+                    && $scope.lifetimeValue.rrr.$dirty)
+                  return true;
+                else
+                  return false;
+              }
+            },
+
+            absolute: function() {
+              var that = this.calcPrepClone();
+              if( ( -this.acp * that.crfr * this.lcr + this.acp + that.rrr) < 0) {
+                // $precisionType.setAlert('error', 'Your referral inputs are too high. Please lower the referral rate, the number of referrals, or both.');
+                $scope.absoluteFail = true;
+              } else {
+                $scope.absoluteFail = false;
+              }
+            },
+
+            compute: function() {
+              if ( !$scope.lifetimeValue.$valid ) // Don't calc if form is not valid
+                return false;
+
+              // Absolute rule
+              if(this.check() && $scope.precisionType === 'precision')
+                this.absolute();
+              this.getCltv();
+              this.getVltv();
+              this.getTor();
+              this.getCurrentValue();
+              this.getFutureValue();
+
+              this.drawPie();
+              $scope.calculated = true;
+            },
+
+            drawPie: function () {
+              this.series = [
+                {
+                  name:   'Current Value',
+                  value:  this.currv
+                },
+                {
+                  name:   'Future Value',
+                  value:  this.futv
+                }
+              ];
+            },
+
+            getCurrentValue: function () {
+              this.currv = (this.rpc - this.cpc - this.vcpc);
+              return this.currv;
+            },
+
+            getFutureValue: function () {
+              this.futv = (this.cltv - this.currv);
+              return this.futv;
+            },
+
+            calcPrepClone: function() {
+              var that = $.extend({}, this),
+                keys = ['crpr','crfr', 'cr', 'rrr'];
+
+              // Turn percentage fields into decimals
+              for (var i = 0; i < keys.length; i++){
+                that[keys[i]] = that[keys[i]] / 100;
+              }
+
+              return that;
+            }
           };
 
-          $scope.form = {
-            attrition: null
+          $scope.compute = function () {
+            this.ltv.compute();
           };
 
           $scope.selectType = function(type) {
-            $scope.attritionType = type;
-          };
-
-          $scope.calcRate = function () {
-            // if($scope.hasBeenEdited('principal','loss') && $scope.principal !== 0){
-              var rate = ($scope.data.loss * 100 / $scope.data.principal).toFixed(2);
-              $scope.rate = Math.min(Math.max(rate, 0), 100); // ensure rate is between 0-100
-            // }
-          };
-
-          $scope.calcLoss = function () {
-            // if($scope.hasBeenEdited('principal', 'rate')) {
-              var loss = Math.round(($scope.data.principal * $scope.rate) / 100);
-              $scope.data.loss = Math.min(Math.max(loss, 0), $scope.data.principal); // ensure the lost amount is not greater than 100%
-            // }
-          };
-
-          $scope.calcPrincipal = function () {
-            // if($scope.hasBeenEdited('rate', 'loss') && $scope.rate !== 0) {
-              var principal = Math.round(($scope.data.loss / $scope.rate) * 100);
-              $scope.data.principal = isFinite(principal) ? principal : 0;
-            // }
-          };
-
-          // Add field to recentlyEdited array properly
-          $scope.wasEdited = function(field) {
-            var index = $scope.recentlyEdited.indexOf(field);
-            if(index !== -1)
-              $scope.recentlyEdited.splice(index, 1);
-            $scope.recentlyEdited.push(field);
-          };
-
-          // Determine if the passed in field(s) are dirty
-          // accepts multiple arguments
-          $scope.hasBeenEdited = function() {
-            var hasBeenEdited = true;
-            angular.forEach(arguments, function(field, index) {
-              if (-1 === $scope.recentlyEdited.indexOf(field))
-                hasBeenEdited = false;
-            });
-            return hasBeenEdited;
-          }
-
-          $scope.smartform = function(ev) {
-            console.log(ev.target.id, angular.isNumber ( $scope.data.loss ), angular.isNumber ( $scope.data.principal ));
-
-            if ( ev.keyCode == 13 )
-              switch ( ev.target.id ) {
-                case 'principal':
-                  
-                  if ( angular.isNumber ( $scope.data.loss ) ) {
-                    console.log('try to calculate');
-                    $scope.calculate();
-                  }
-                  else {
-                    var lossEl = document.querySelector ( '#loss' );
-                    lossEl.select();
-                    lossEl.focus();
-                    lossEl.setSelectionRange && lossEl.setSelectionRange(0, 0);
-                    console.log('focus loss input');
-                  }
-                  break;
-                case 'loss':
-
-                  if ( angular.isNumber ( $scope.data.principal ) ) {
-                    $scope.calculate();
-                    console.log('try to calculate');
-                  }
-                  else {
-                    var principalEl = document.querySelector ( '#principal' );
-                    principalEl.select();
-                    principalEl.focus();
-                    principalEl.setSelectionRange && principalEl.setSelectionRange(0, 0);
-                    console.log('focus principal input');
-                  }
-                  break;
-              }
-          };
-
-          $scope.calculate = function() {
-            if ( !$scope.form.AttritionForm.$valid ) {
-              $scope.total_retention_month  = 0;
-              $scope.total_retention_year   = 0;
-              $scope.avg_retention_month    = 0;
-              $scope.avg_retention_year     = 0;
-              $scope.calculated             = false;
-              $scope.percent                = 0;
-              return false; // If fields are not filled then do nothing
-            }
-
-            $scope.calcRate();
-            // $scope.calcLoss();
-            // $scope.calcPrincipal();
-
-            // Computations common to all
-            $scope.total_retention_month  = (1 / $scope.rate) * 100;
-            $scope.total_retention_year   = $scope.total_retention_month / 12;
-            $scope.avg_retention_month    = ($scope.total_retention_month + 1) / 2;
-            $scope.avg_retention_year     = $scope.avg_retention_month / 12;
-            $scope.percent                = $scope.rate.toFixed(1);
-            
-            // Infinity isn't as nice as 0
-            angular.forEach(['total_retention_month','total_retention_year','avg_retention_month','avg_retention_year'], function(variable) {
-              if ($scope[variable] === Infinity)
-                $scope[variable]  = 0;
-            });
-
-            $scope.calculated = true;
+            $scope.precisionType = type;
           };
 
           $scope.clear = function() {
-            $scope.rate                   = null;
-            $scope.total_retention_month  = 0;
-            $scope.total_retention_year   = 0;
-            $scope.avg_retention_month    = 0;
-            $scope.avg_retention_year     = 0;
-            $scope.calculated             = false;
-            $scope.percent                = 0;
+            $scope.calculated = false;
 
-            $scope.data = { // This is necessary due to child scope of ion-content
-              principal:  null,
-              loss:       null
+             $scope.ltv = {
+              // Inputs
+              rpc:  null,  // Revenue per Conversion
+              cpc:  null,    // COGS per Conversion
+              vcpc: null,   // Variable Cost per Conversion
+              crpr: null,   // Customer Repurchase Rate
+              crfr: null,   // Customer Referral Rate
+              cr:   null,     // Conversion Rate
+
+              // Precision-only inputs
+              acp:  null,    // Annual Customer Purchases
+              lcr:  null,    // Lifetime Customer Referrals
+              clt:  null,    // Customer Lifetime
+              rrr:  null,    // Required Rate of Return
+
+              // Outputs
+              cltv: 0,  // Customer Life Time Value
+              vltv: 0,  // Visitor Life Time Value
+              tor:  0,   // Life Time Value to Revenue
+              currv:0,
+              futv: 0,
+              series: [
+                {
+                    name:   'Current Value',
+                    value:  this.currv
+                  },
+                  {
+                    name:   'Future Value',
+                    value:  this.futv
+                  }
+              ]
             };
+
           };
 
         }

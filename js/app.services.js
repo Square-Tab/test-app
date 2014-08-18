@@ -1,6 +1,6 @@
 (function(window, angular) {
 		
-	angular.module('SmartCalculatorApp')
+	angular.module('LTVCalculatorApp')
 
 		.factory('removeComma',
 			function() {

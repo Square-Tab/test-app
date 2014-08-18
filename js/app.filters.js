@@ -1,6 +1,6 @@
 (function(window, angular) {
 
-	angular.module('SmartCalculatorApp')
+	angular.module('LTVCalculatorApp')
 
 		/* orderBy, but with objects.
 		 * http://justinklemm.com/angularjs-filter-ordering-objects-ngrepeat/

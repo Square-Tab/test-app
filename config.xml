@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.smartcalculator113452" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>Attrition Calculator</name>
+  <name>Life Time Value Calculator</name>
   <description>
-        A Netmark attrition calculator tool
-    </description>
+    A Netmark lifetime value calculator.    
+  </description>
   <author email="luiscarlosjayk@gmail.com" href="http://luiscarlosjayk.com">
       Luis Carlos Osorio Jayk
     </author>
@@ -29,6 +29,10 @@
   <!-- Deny access to external resources -->
   <access />
 
+  <!-- None permissions required -->
+  <preference name="permissions" value="none" />
+
+  <!-- Features -->
   <preference name="phonegap-version" value="3.5.0" />
   <preference name="orientation" value="portrait" /> <!-- all: default means both landscape and portrait are enabled -->
   <preference name="target-device" value="universal" /> <!-- all: possible values handset, tablet, or universal -->
