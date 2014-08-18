@@ -75,10 +75,14 @@
 									r = percent < 50 ? 255 : Math.floor(255 - (percent * 2 - 100) * 255 / 100);
 									g = percent > 50 ? 255 : Math.floor((percent * 2) * 255 / 100);
 									return 'rgb(' + r + ',' + g + ',0)';
-								},
+								};
+
+								width 	= width > 0 ? width : $('#' + attrs.id).parent().parent().width() / 2;
+								height 	= height > 0 ? height : $('#' + attrs.id).parent().parent().height() / 2;
+								height 	= height > 0 ? height : width;
 
 								//draw circle
-								arc = d3.svg.arc()
+								var arc = d3.svg.arc()
 									.innerRadius((height + width) / 7 + 10)//50
 									.outerRadius((height + width) / 5 + 10)//65
 									.startAngle(0),
@@ -186,8 +190,13 @@
 								$element[0].id = id; // Set element id property if not given
 
 							var width 			= options.width,
-								height 			= options.height,
-								radius 			= Math.min(width, height) / 2,
+								height 			= options.height;
+
+								width 	= width > 0 ? width : $('#' + attrs.id).parent().parent().width() / 2;
+								height 	= height > 0 ? height : $('#' + attrs.id).parent().parent().height() / 2;
+								height 	= height > 0 ? height : width;
+
+							var	radius 			= Math.min(width, height) / 2,
 								innerRadius 	= (radius / 2),
 								outerRadius 	= (radius),
 								
