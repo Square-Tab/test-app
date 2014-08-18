@@ -25,6 +25,11 @@
 
 /* ------------------------------- END OF FONTS ----------------------------- */
 
+*{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+}
+
 .calc_header {
 	background-color: #484848;
 	height: 46px
