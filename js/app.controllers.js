@@ -41,13 +41,24 @@
             futv:   0,      // Future Value
             series: [
               {
-                  name:   'Current Value',
-                  value:  this.currv
-                },
-                {
-                  name:   'Future Value',
-                  value:  this.futv
-                }
+                name:   '',
+                value:  100
+              }
+              // {
+              //     name:   'Uno',
+              //     value:  50,
+              //     color: '#f00'
+              // },
+              // {
+              //     name:   'Dos',
+              //     value:  40,
+              //     color: '#0f0'
+              // },
+              // {
+              //     name:   'Tres',
+              //     value:  10,
+              //     color: '#00f'
+              // }
             ],
 
             getCltv: function() {
@@ -169,7 +180,7 @@
           };
 
           $scope.compute = function () {
-            this.ltv.compute();
+            $scope.ltv.compute();
           };
 
           $scope.selectType = function(type) {
@@ -179,7 +190,7 @@
           $scope.clear = function() {
             $scope.calculated = false;
 
-             $scope.ltv = {
+             $scope.ltv = angular.extend($scope.ltv, {
               // Inputs
               rpc:  null,  // Revenue per Conversion
               cpc:  null,    // COGS per Conversion
@@ -202,15 +213,12 @@
               futv: 0,
               series: [
                 {
-                    name:   'Current Value',
-                    value:  this.currv
-                  },
-                  {
-                    name:   'Future Value',
-                    value:  this.futv
-                  }
+                  name:   '',
+                  value:  100,
+                  color: '#e8e8e8'
+                }
               ]
-            };
+            });
 
           };
 

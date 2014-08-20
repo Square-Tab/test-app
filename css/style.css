@@ -202,3 +202,21 @@
 .col.col-offset-15 {
 	margin-left: 15%;
 }
+
+/**
+ * Donut Pie Chart
+ */
+.donutpie .units{
+  fill: gray;
+  font-size: 12px;
+}
+
+.donutpie .label{
+  fill: #CCC;
+  font-size: 12px;
+  font-weight: bold;
+}
+.donutpie .value{
+  font-size: 12px;
+  font-weight: bold;
+}
