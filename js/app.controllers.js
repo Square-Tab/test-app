@@ -146,11 +146,11 @@
             drawPie: function () {
               this.series = [
                 {
-                  name:   'Current Value',
+                  name:   'Current',
                   value:  this.currv
                 },
                 {
-                  name:   'Future Value',
+                  name:   'Future',
                   value:  this.futv
                 }
               ];
@@ -212,11 +212,10 @@
               currv:0,
               futv: 0,
               series: [
-                {
-                  name:   '',
-                  value:  100,
-                  color: '#e8e8e8'
-                }
+                // {
+                //   name:   '',
+                //   value:  0
+                // }
               ]
             });
 

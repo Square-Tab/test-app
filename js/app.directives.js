@@ -172,9 +172,6 @@
 
 						var	width 		= $('#' + $attrs.id).parent().parent().width();
 							height 		= width / 1.5;
-						
-						console.log(width, height);
-						console.log( $('#' + id).parent().parent().parent().parent() );
 
 						var radius 			= Math.min(width, height) / 4,
 							innerRadius		= ( radius / 2 ),
@@ -231,14 +228,30 @@
 											  .attr("r", innerRadius);
 
 						$scope.$watch ( 'series', function ( series ) {
-							if ( series.length <= 0 )
-								return;
-
+							
 							arraySize 			= series.length;
   							streakerDataAdded 	= series;
 
   							oldPieData 			= filteredPieData;
   							pieData 			= donut (streakerDataAdded);
+
+  							// Remove stuff
+  							if (series.length <= 0) {
+  								arc_group.selectAll("path").remove();
+  								label_group.selectAll("line").remove();
+  								label_group.selectAll("text.value").remove();
+  								label_group.selectAll("text.units").remove();
+
+  								//PLACEHOLDER GRAY CIRCLE
+								var paths = arc_group.append("svg:circle")
+											    .attr("fill", "#EFEFEF")
+											    .attr("r", radius);
+
+								//WHITE CIRCLE BEHIND LABELS
+								var whiteCircle = center_group.append("svg:circle")
+													  .attr("fill", "white")
+													  .attr("r", innerRadius);
+  							}
 
   							var totalOctets = 0;
 							filteredPieData = pieData.filter(filterData);
@@ -522,8 +535,6 @@
 					                .attr("fill", function(d, i) {
 					                	if ( data[i].hasOwnProperty('color') && !!data[i].color )
 					                		return data[i].color;
-
-					                	console.log(data[i].color);
 
 					                	return color(i);
 					                }) //set the color for each slice to be chosen from the color function defined above
